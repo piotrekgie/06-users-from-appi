@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react";
+import ReactPlaceholder from "react-placeholder";
+import "react-placeholder/lib/reactPlaceholder.css"
 
 import User from "./User";
 import './users.scss';
@@ -21,7 +23,7 @@ function UserList() {
                     setLoading(false);
                     setError(true);
                 });
-        }, 1000);
+        }, 2000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -32,9 +34,17 @@ function UserList() {
             <div className="user-list">
                 {isLoading && <div>Loading...</div>}
                 {hasError && <div>Something went wrong. Please try again later.</div>}
-                {users && users.map((user) => (
-                    <User key={user.login.uuid} user={user}/>
-                ))}
+
+                <ReactPlaceholder
+                    type='text'
+                    rows={10}
+                    ready={!isLoading}
+                    style={{width: 300, marginTop: 10}}
+                >
+                    {users && users.map((user) => (
+                        <User key={user.login.uuid} user={user}/>
+                    ))}
+                </ReactPlaceholder>
             </div>
         </>
     )
