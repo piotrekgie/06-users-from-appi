@@ -9,17 +9,21 @@ function UserList() {
     const [hasError, setError] = useState(false);
 
     useEffect(() => {
-        fetch('https://randomuser.me/api/?results=10')
-            .then((response) => response.json())
-            .then((data) => {
-                setUsers(data.results);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-                setError(true);
-            });
+        const timer = setTimeout(() => {
+            fetch('https://randomuser.me/api/?results=10')
+                .then((response) => response.json())
+                .then((data) => {
+                    setUsers(data.results);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setLoading(false);
+                    setError(true);
+                });
+        }, 2000);
+
+        return () => clearTimeout(timer);
     }, []);
 
     return (
