@@ -1,10 +1,37 @@
 .user-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 75%;
+
     &-header {
         text-align: center;
     }
 
-    .user {
-        border: 1px solid black;
-        padding: 10px;
+    a {
+        color: black;
+        cursor: pointer;
+        flex: 50%;
+        text-decoration: none;
+
+        .user {
+            border: 1px solid black;
+            display: flex;
+            padding: 10px;
+
+            .user-photo {
+                text-align: center;
+            }
+
+            .user-data {
+                margin-left: 20px;
+                text-align: left;
+
+                label {
+                    font-weight: bold;
+                    padding: 0 5px;
+                }
+            }
+        }
     }
 }
