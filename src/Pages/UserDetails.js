@@ -1,6 +1,7 @@
 import React from "react";
 import {useLocation, useHistory} from 'react-router-dom';
 
+import UserMap from "./UserMap";
 import './user.scss';
 
 function UserDetails() {
@@ -32,6 +33,7 @@ function UserDetails() {
                     <div><label>Cell:</label>{user.cell}</div>
                     <div><label>Address:</label>{userLocation}</div>
                 </div>
+                <UserMap coordinates={user.location.coordinates}/>
             </div>
             }
         </div>
