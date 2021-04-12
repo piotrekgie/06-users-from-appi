@@ -1,50 +1,14 @@
-import React, {useState, useEffect} from "react";
-import ReactPlaceholder from "react-placeholder";
-import "react-placeholder/lib/reactPlaceholder.css"
-
 import User from "./User";
 import './users.scss';
 
-function UserList() {
-    const [users, setUsers] = useState([]);
-    const [isLoading, setLoading] = useState(true);
-    const [hasError, setError] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            fetch('https://randomuser.me/api/?results=10')
-                .then((response) => response.json())
-                .then((data) => {
-                    setUsers(data.results);
-                    setLoading(false);
-                })
-                .catch((error) => {
-                    console.log(error);
-                    setLoading(false);
-                    setError(true);
-                });
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
+function UserList({users}) {
     return (
         <>
             <h2 className="user-list-header">Users List</h2>
             <div className="user-list">
-                {isLoading && <div>Loading...</div>}
-                {hasError && <div>Something went wrong. Please try again later.</div>}
-
-                <ReactPlaceholder
-                    type='text'
-                    rows={10}
-                    ready={!isLoading}
-                    style={{width: 300, marginTop: 10}}
-                >
                     {users && users.map((user) => (
                         <User key={user.login.uuid} user={user}/>
                     ))}
-                </ReactPlaceholder>
             </div>
         </>
     )

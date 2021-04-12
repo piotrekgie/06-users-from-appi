@@ -14,6 +14,13 @@ function UserDetails() {
     const userName = (user && user.location) ?
         (user.name.title + ' ' + user.name.first + ' ' + user.name.last) :
         'No name was provided';
+    const dateObject = (user && new Date(user.registered.date)) ? new Date(user.registered.date) : 'N/A';
+    const userRegisteredDate = (dateObject !== 'N/A' && new Intl.DateTimeFormat("en", {
+        year: "numeric",
+        month: "long",
+        day: "2-digit",
+        weekday: 'long'
+    }).format(dateObject));
 
     return (
         <div className="user-details-wrapper">
@@ -21,7 +28,7 @@ function UserDetails() {
             {user &&
             <div className="user-details">
                 <div className="user-photo">
-                    <img alt="user-photo" title="User photo" src={user.picture.medium}/>
+                    <img alt="user-photo" title="User photo" src={user.picture.large}/>
                 </div>
                 <div className="user-data">
                     <div><label>Name:</label>{userName}</div>
@@ -32,6 +39,7 @@ function UserDetails() {
                     <div><label>Phone:</label>{user.phone}</div>
                     <div><label>Cell:</label>{user.cell}</div>
                     <div><label>Address:</label>{userLocation}</div>
+                    <div><label>Registered date:</label>{userRegisteredDate}</div>
                 </div>
                 <UserMap coordinates={user.location.coordinates}/>
             </div>
