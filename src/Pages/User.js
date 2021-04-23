@@ -2,10 +2,10 @@ import React from "react";
 
 function User({user}) {
     const userLocation = (user && user.location) ?
-        (user.location.street.name + ' ' + user.location.street.number + ' ' + user.location.city) :
+        (`${user.location.street.name} ${user.location.street.number} ${user.location.city}`) :
         'N/A';
     const userName = (user && user.location) ?
-        (user.name.title + ' ' + user.name.first + ' ' + user.name.last) :
+        (`${user.name.title} ${user.name.first} ${user.name.last}`) :
         'No name was provided';
     const dateObject = (user && new Date(user.registered.date)) ? new Date(user.registered.date) : 'N/A';
     const userRegisteredDate = (dateObject !== 'N/A' && new Intl.DateTimeFormat("en", {
