@@ -17,7 +17,6 @@ function App() {
       try {
         const response = await fetch('https://randomuser.me/api/?results=10');
         const json = await response.json();
-        console.log(json.results);
 
         setUsers(json.results);
       } catch (error) {
@@ -26,18 +25,6 @@ function App() {
       } finally {
         setLoading(false);
       }
-      // fetch('https://randomuser.me/api/?results=10')
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //         setUsers(data.results);
-      //     })
-      //     .catch((error) => {
-      //         console.log(error);
-      //         setError(true);
-      //     })
-      //   .finally(() => {
-      //       setLoading(false);
-      //   });
     }, 2000);
 
     return () => clearTimeout(timer);
